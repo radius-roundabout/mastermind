@@ -1,0 +1,62 @@
+I = 1
+While I < 9
+  
+
+
+Class game
+
+Initialize 
+White counter = 0
+Red counter = 0
+All Colors array 
+Code array 
+Guess array
+All guesses included (?) 
+
+Method for random generation from
+  An array of 6 colors. Array.sample for each position of 4 in the code array
+
+Get guess of four colors
+Validate guess—all guesses included in array of possible choices 
+Guess array each do guess IF guess NOT included in all colors return false. 
+
+Def give feedback: if guess array each with index do guess index
+ IF guess included in code array 
+ White counter += 1
+If guess == code array [guess index] 
+Red counter += 1
+
+Def display feedback
+White and red counters 
+
+Def did you win?
+True If red counter == 4
+Display “you won!”
+
+
+Do you want to be the creator or the guesser?
+Gets code array
+Game.validate 
+Computer guesses by generate random array.
+
+Game class
+Human code maker 
+Or—module of methods? 
+Game methods, board class?
+Human player (choice of role) 
+Computer player (game methods, specific comp solution methods) 
+Board class with display methods 
+
+For computer to win
+If red, in each with index loop, 
+Put that color in the code break array.
+Skip it on future checks by mandating
+Only empty slots be filled
+
+For white—on next generated array, put that color first, generate rest of colors randomly, then shuffle 
+
+Continue through 13 times 
+
+If following rules—comp starts with 2 colors, each twice. 
+
+Generates the 1100+ code? Arrays?
