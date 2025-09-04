@@ -1,27 +1,35 @@
 # frozen_string_literal: true
 
-require_relative 'lib/player'
+require_relative 'player'
+require_relative 'game'
 
 # class for human player
 class HumanPlayer < Player
-  # def initialize(human_class, computer_class)
-  #   super
-  #   @human = human_class
-  #   @computer = computer_class
-  # end
-  def choose_role
-    puts 'Do you want to be the codemaker or codebreaker?'
-    role = gets.chomp.toLower
-    choose_role until %w[codemaker codebreaker].include?(role)
+  # codemaker method for humans
+  def make_code
+    puts 'You have chosen to create the code.'
+    puts
+
+    initial_instructions
+
+    create_code_array
   end
 
-  # codemaker methods for human player
-  
-  def 
-    
+  # codebreaker methods for human
+  def take_a_turn(number)
+    give_instructions(number)
+    create_code_array
   end
 
-   def ask_for_first_guess
+  def give_instructions(number)
+    if number.zero?
+      initial_instructions
+    else
+      next_instructions
+    end
+  end
+
+  def initial_instructions
     puts
     puts 'Please enter an array of four colors.'
     puts 'Choose from the following:'
@@ -30,27 +38,26 @@ class HumanPlayer < Player
     puts
   end
 
-  def ask_for_next_guesses
+  def next_instructions
     puts 'Please enter another guess.'
     puts
   end
 
-  def ask_for_human_input
+  def create_code_array
     # takes comma-separated list and breaks it into an array, removing spaces
-    @current_guess = gets.chomp.split(',').map(&:strip)
+    new_code_array = gets.chomp.split(',').map(&:strip)
 
-    return unless guess_valid? == false
+    return unless array_valid?(new_code_array) == false
 
-    ask_for_human_input
+    create_code_array
   end
 
-  def guess_valid?
-    @current_guess.each do |color|
-      next if COLORS.include?(color)
+  def array_valid?(new_array)
+    new_array.each do |color|
+      next if Game::COLORS.include?(color)
 
       return false
     end
+    new_array
   end
-
-
 end

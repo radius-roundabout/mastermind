@@ -60,3 +60,21 @@ Continue through 13 times
 If following rules—comp starts with 2 colors, each twice. 
 
 Generates the 1100+ code? Arrays?
+
+Need to have 2 classes, computer 
+and Human
+They should have the same methods,
+get initialized in the game class
+
+first method called: do you want 
+to be the codemaker or breaker
+
+methods:
+
+codemaker: 
+create code/enter code 
+give feedback 
+did you win (end)
+
+codebreaker
+make guesses 

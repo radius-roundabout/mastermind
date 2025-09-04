@@ -2,8 +2,7 @@
 
 # player superclass
 class Player
-  def initialize(game, name)
+  def initialize(game)
     @game = game
-    @name = name
   end
 end
