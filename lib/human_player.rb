@@ -47,7 +47,7 @@ class HumanPlayer < Player
     # takes comma-separated list and breaks it into an array, removing spaces
     new_code_array = gets.chomp.split(',').map(&:strip)
 
-    return unless array_valid?(new_code_array) == false
+    return new_code_array unless array_valid?(new_code_array) == false
 
     create_code_array
   end
@@ -58,6 +58,5 @@ class HumanPlayer < Player
 
       return false
     end
-    new_array
   end
 end
