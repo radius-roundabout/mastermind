@@ -78,3 +78,45 @@ did you win (end)
 
 codebreaker
 make guesses 
+
+Code for ensuring that a color included in the code but not in the right spot
+does not get counted twice. Say code is (red, purple, yellow, blue) and you guess
+(red, red, red, red)--you don't want red counted 4 times. 
+
+@code.reduce(Hash.new(0)) do |histogram, color|
+  histogram[color] += 1
+  histogram
+end
+
+if histogram.include?(color) && @white_counter <= histogram[color]
+  white_counter += 1
+
+
+computer play logic:
+
+first guess = Array.new(4, red)
+
+def print_guess(guess_array)
+  puts "#{guess_array[0]}, #{guess_array[1]}, #{guess_array[2]}, #{guess_array[3]}
+end
+
+GAME::COLORS.each do |color|
+  guess_array = Array.new(4, color)
+  if computer_guess_array[index] = 0 
+    print_guess(guess_array)
+    give_feedback(guess_array)
+    save_red_guesses(guess_array)
+
+  end
+end
+
+
+def save_red_guesses(guess_array)
+ guess.each_with_index do |color, index|
+      # right color, right place
+      if color == @code[index]
+        computer_guess_array[index] = color 
+      end
+      
+  end
+end

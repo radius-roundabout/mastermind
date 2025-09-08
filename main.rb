@@ -20,7 +20,7 @@ my_role = choose_role
 new_game = Game.new(HumanPlayer, ComputerPlayer) if my_role == 'codemaker'
 new_game = Game.new(ComputerPlayer, HumanPlayer) if my_role == 'codebreaker'
 
-answer = 'Y'
+answer = ''
 
 until answer == 'N'
   new_game.play
