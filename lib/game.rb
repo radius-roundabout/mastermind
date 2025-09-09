@@ -124,7 +124,8 @@ class Game
 
       @white_counter += 1
       guess_temp[index] = 'counted'
-      code_temp[index] = 'counted'
+      white_index = code_temp.index(color)
+      code_temp[white_index] = 'counted'
       break if guess_temp.uniq == 'counted'
     end
   end
@@ -148,7 +149,7 @@ class Game
   #   end
 
   def did_you_win?
-    return unless @red_total == 4
+    return unless @red_counter == 4
 
     puts 'You won!'
     true

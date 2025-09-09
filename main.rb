@@ -27,6 +27,6 @@ until answer == 'N'
 
   until %w[Y N].include?(answer)
     puts 'Do you want to play again? Y/N'
-    answer = gets.chomp
+    answer = gets.chomp.upcase
   end
 end

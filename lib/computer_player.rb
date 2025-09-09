@@ -17,30 +17,54 @@ class ComputerPlayer < Player
   # codebreaker methods for computer
   def computer_play(real_code)
     all_code_options = Game::COLORS.repeated_permutation(4).to_a
-    guess = %w[red red orange orange]
+    # all_code_options = [%w[red red red red], %w[red red red orange], %w[green blue red purple],
+    #                     %w[orange red yellow green], %w[red yellow orange blue]]
+    first_guess = %w[red red orange orange]
+    first_guess_result = submit_a_guess(first_guess, real_code)
+
+    keep_guessing(all_code_options, first_guess, first_guess_result, real_code)
+  end
+
+  def submit_a_guess(guess, real_code)
     print guess
     guess_result = @game.give_feedback(guess, real_code)
     print guess_result
-    return if @game.did_you_win?
-
-    keep_guessing(all_code_options, guess, guess_result)
+    guess_result
   end
 
-  def evaluate_guesses(code_array, guess, guess_result)
-    code_array.each_with_index do |code_option, index|
-      # assumes guess is the code, compares every code option to guess
-      next unless @game.give_feedback(code_option, guess) != guess_result
+  def keep_guessing(code_array, guess, guess_result, real_code)
+    filtered_array = filter(code_array, guess, guess_result)
 
-      code_array.delete_at(index)
+    7.times do
+      puts filtered_array.length
+      guess = filtered_array[0]
+      guess_result = submit_a_guess(guess, real_code)
+      # if the computer's guess is right but it hasn't finished filtering
+      break if did_computer_win?(guess_result)
+
+      filtered_array = filter(filtered_array, guess, guess_result)
+      # checks answer when filtered array only has 1 guess in it
+      check_final_answer(filtered_array, real_code)
     end
   end
 
-  def keep_guessing(code_array, guess, guess_result)
-    until code_array.length == 1
-      evaluate_guesses(code_array, guess, guess_result)
-      guess = code_array[0]
-      print guess
-    end
-    puts 'Computer won!'
+  def filter(array, guess, guess_result)
+    # compares all possible codes to the current guess, selects all that would return the same result
+    # if they were the guess instead
+    array.filter { |code_option| @game.give_feedback(code_option, guess) == guess_result }
+  end
+
+  def check_final_answer(filtered_array, real_code)
+    return unless filtered_array.length == 1
+
+    final_answer = submit_a_guess(filtered_array, real_code)
+    did_computer_win?(final_answer)
+  end
+
+  def did_computer_win?(array)
+    return unless array[0] == 4
+
+    print 'Computer won!'
+    true
   end
 end
