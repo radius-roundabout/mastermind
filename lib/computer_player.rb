@@ -28,16 +28,15 @@ class ComputerPlayer < Player
   end
 
   def submit_a_guess(guess, real_code)
-    print guess
-    guess_result = @game.give_feedback(guess, real_code)
-    @game.display_feedback(guess_result[0], guess_result[1])
+    display_guess(guess)
+    guess_result = give_feedback(guess, real_code)
+    display_feedback(guess_result[0], guess_result[1])
     guess_result
   end
 
   def keep_guessing(filtered_array, real_code)
     # This strategy produces a win in an average of 5 moves
     15.times do
-      puts filtered_array.length
       guess = filtered_array[0]
       guess_result = submit_a_guess(guess, real_code)
       # if the computer's guess is right but it hasn't finished filtering
@@ -52,7 +51,7 @@ class ComputerPlayer < Player
   def filter(array, guess, guess_result)
     # compares all possible codes to the current guess, selects all that would return the same result
     # if they were the guess instead
-    array.filter { |code_option| @game.give_feedback(code_option, guess) == guess_result }
+    array.filter { |code_option| give_feedback(code_option, guess) == guess_result }
   end
 
   def final_answer_correct?(filtered_array, real_code)
@@ -65,7 +64,10 @@ class ComputerPlayer < Player
   def did_computer_win?(array)
     return unless array[0] == 4
 
-    print 'Computer won!'
+    puts
+    puts 'Computer won!'
+    puts
+
     true
   end
 end

@@ -16,11 +16,11 @@ class HumanPlayer < Player
   end
 
   # codebreaker methods for human
-  def human_play
+  def human_play(real_code)
     # the codebreaker player gets 12 guesses
     12.times do |number|
-      @current_guess = take_a_turn(number)
-      give_feedback(@current_guess)
+      current_guess = take_a_turn(number)
+      give_feedback(current_guess, real_code)
       display_feedback(@red_counter, @white_counter)
       break if did_you_win?
     end
@@ -55,9 +55,9 @@ class HumanPlayer < Player
 
   def create_code_array
     # takes comma-separated list and breaks it into an array, removing spaces
-    gets.chomp.split(',').map(&:strip)
+    new_code_array = gets.chomp.split(',').map(&:strip)
 
-    return unless array_valid?(new_code_array) == false
+    return new_code_array unless array_valid?(new_code_array) == false
 
     create_code_array
   end
