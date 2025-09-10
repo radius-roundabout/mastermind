@@ -22,20 +22,21 @@ class ComputerPlayer < Player
     first_guess = %w[red red orange orange]
     first_guess_result = submit_a_guess(first_guess, real_code)
 
-    keep_guessing(all_code_options, first_guess, first_guess_result, real_code)
+    filtered_array = filter(all_code_options, first_guess, first_guess_result)
+
+    keep_guessing(filtered_array, real_code)
   end
 
   def submit_a_guess(guess, real_code)
     print guess
     guess_result = @game.give_feedback(guess, real_code)
-    print guess_result
+    @game.display_feedback(guess_result[0], guess_result[1])
     guess_result
   end
 
-  def keep_guessing(code_array, guess, guess_result, real_code)
-    filtered_array = filter(code_array, guess, guess_result)
-
-    7.times do
+  def keep_guessing(filtered_array, real_code)
+    # This strategy produces a win in an average of 5 moves
+    15.times do
       puts filtered_array.length
       guess = filtered_array[0]
       guess_result = submit_a_guess(guess, real_code)
@@ -44,7 +45,7 @@ class ComputerPlayer < Player
 
       filtered_array = filter(filtered_array, guess, guess_result)
       # checks answer when filtered array only has 1 guess in it
-      check_final_answer(filtered_array, real_code)
+      break if final_answer_correct?(filtered_array, real_code)
     end
   end
 
@@ -54,10 +55,10 @@ class ComputerPlayer < Player
     array.filter { |code_option| @game.give_feedback(code_option, guess) == guess_result }
   end
 
-  def check_final_answer(filtered_array, real_code)
+  def final_answer_correct?(filtered_array, real_code)
     return unless filtered_array.length == 1
 
-    final_answer = submit_a_guess(filtered_array, real_code)
+    final_answer = submit_a_guess(filtered_array.flatten, real_code)
     did_computer_win?(final_answer)
   end
 

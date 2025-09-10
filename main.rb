@@ -24,9 +24,12 @@ answer = ''
 
 until answer == 'N'
   new_game.play
+  puts
+  puts 'Do you want to play again? Y/N'
+  answer = gets.chomp.upcase
 
   until %w[Y N].include?(answer)
-    puts 'Do you want to play again? Y/N'
-    answer = gets.chomp.upcase
+    puts
+    puts 'Please enter Y or N. Do you want to play again?'
   end
 end
