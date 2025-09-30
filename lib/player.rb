@@ -21,6 +21,7 @@ class Player
     [@red_counter, @white_counter]
   end
 
+  # red peg = right answer
   def count_reds(guess_temp, code_temp)
     guess_temp.each_with_index do |color, index|
       next unless color == code_temp[index]
@@ -32,6 +33,7 @@ class Player
     end
   end
 
+  # white peg = color is right but in wrong place
   def count_whites(guess_temp, code_temp)
     guess_temp.each_with_index do |color, index|
       next if color == 'counted'

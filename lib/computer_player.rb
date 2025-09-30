@@ -51,6 +51,7 @@ class ComputerPlayer < Player
   def filter(array, guess, guess_result)
     # compares all possible codes to the current guess, selects all that would return the same result
     # if they were the guess instead
+    # It is hugely inefficient to have this run through the whole array on every guess
     array.filter { |code_option| give_feedback(code_option, guess) == guess_result }
   end
 

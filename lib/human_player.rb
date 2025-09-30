@@ -15,7 +15,7 @@ class HumanPlayer < Player
     create_code_array
   end
 
-  # codebreaker methods for human
+  # codebreaker method for human
   def human_play(real_code)
     # the codebreaker player gets 12 guesses
     12.times do |number|
