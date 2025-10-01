@@ -15,7 +15,7 @@ class ComputerPlayer < Player
   end
 
   # codebreaker methods for computer
-  def computer_play(real_code)
+  def break_code(real_code)
     all_code_options = Game::COLORS.repeated_permutation(4).to_a
     # all_code_options = [%w[red red red red], %w[red red red orange], %w[green blue red purple],
     #                     %w[orange red yellow green], %w[red yellow orange blue]]

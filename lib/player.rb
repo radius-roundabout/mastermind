@@ -2,10 +2,14 @@
 
 # player superclass
 class Player
+  attr_reader :red_counter, :white_counter
+
+  include TextContent
+
+  COLORS = %w[red orange yellow green blue purple].freeze
+
   def initialize(game)
     @game = game
-    @red_counter = 0
-    @white_counter = 0
   end
 
   # feedback methods, used for both players
